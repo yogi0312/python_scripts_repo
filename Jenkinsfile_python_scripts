@@ -4,6 +4,8 @@ pipeline {
     stages {
         stage('Run Python Script') {
             steps {
+                                // List files in the workspace
+                                sh 'ls -l'
                                 // Check for python or python3 and run the script
                                 sh '''
                                 if command -v python >/dev/null 2>&1; then
