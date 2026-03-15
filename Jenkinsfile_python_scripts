@@ -4,8 +4,17 @@ pipeline {
     stages {
         stage('Run Python Script') {
             steps {
-                // Run the Python script
-                sh 'python python_script.py'
+                                // Check for python or python3 and run the script
+                                sh '''
+                                if command -v python >/dev/null 2>&1; then
+                                    python python_script.py
+                                elif command -v python3 >/dev/null 2>&1; then
+                                    python3 python_script.py
+                                else
+                                    echo "Python is not installed."
+                                    exit 127
+                                fi
+                                '''
             }
         }
     }
